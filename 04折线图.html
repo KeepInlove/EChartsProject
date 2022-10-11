@@ -6,11 +6,94 @@
 @date 2022/10/8-14:44
 @email 904004593@qq.com
 -->
-<head>
+<script src="js/echarts.min.js"></script>
+</head>
+<div id="my" style="width: 600px;height: 400px">
+</div>
     <meta charset="UTF-8">
     <title>04折线图</title>
 </head>
 <body>
+<script !src="">
+    var mCharts = echarts.init(document.getElementById('my'))
+    var xDataArr = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月','9月','10月','11月','12月']
+    // var yDataArr = [1100, 980, 880, 850, 888, 800, 900, 1005,1200,908,999,1000]
+    var yDataArr = [4100, 3980, 3880, 3850, 3888, 3800, 3900, 4005,4200,3908,3999,4000]
+    var yDataArr2 = [2100, 1980, 1880, 1850, 1888, 1800, 1900, 1905,1800,1908,1999,2000]
+    var option = {
+        tooltip: {},
+        title: {
+            text: '销量',
+            link: 'http://blog.stilling.cn/',
+            textStyle: {
+                color: '#5a6fc0'
+            }
+        },
+        xAxis: {
+            type: 'category', //类目轴
+            data: xDataArr,
+            boundaryGap:false
+        },
+        yAxis: {
+            type: 'value',//数值轴
+            scale:true
+        },
+        series: [
+            {
+                name: '销量',
+                type: 'line',
+                markPoint:{
+                    data:[
+                        {type:'max' },
+                        {type:'min' },
+                    ]
+                },
+                markLine:{
+                    data:[
+                        {type: 'average'}
+                    ]
+                },
+                markArea:{
+                    data:[
+                       [
+                           {xAxis: '1月'},
+                           {xAxis: '2月'},
+                       ], [
+                           {xAxis: '10月'},
+                           {xAxis: '12月'},
+                       ],
 
+                    ]
+                },
+                //平滑
+                smooth:true,
+                lineStyle:{
+                  color: 'green',
+                    type:'solid',//dashed dotted solid
+                },
+                areaStyle:{
+                    color:'pink'
+                },
+                label:{
+                    show:true,
+                    rotate:60,
+                    position:'top'
+                },
+                barWidth:20,
+                data: yDataArr,
+                stack:'all',
+            },
+            {
+                name: '利润',
+                type: 'line',
+                data: yDataArr2,
+                stack: 'all',
+                areaStyle:{}
+            }
+        ],
+        backgroundColor: '#0f0c28',
+    }
+    mCharts.setOption(option)
+</script>
 </body>
 </html>

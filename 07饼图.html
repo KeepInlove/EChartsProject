@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@Description:
+@author:guo
+@date 2022/10/11-16:19
+@email 904004593@qq.com
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>07饼图</title>
+    <script src="js/echarts.min.js"></script>
+    <!--
+    1.基本代码结构
+    2.准备数据
+    3.实例化对象
+    4.准备配置项
+    5.将配置项设置给echarts实例
+    -->
+</head>
+<body>
+<div id="my" style="width: 600px;height: 400px">
+</div>
+</body>
+<script>
+    var mCharts = echarts.init(document.getElementById('my'))
+    var pieData = [
+        {
+            name: '淘宝',
+            value: 11255
+        }, {
+            name: '京东',
+            value: 21255
+        },
+        {
+            name: '拼多多',
+            value: 8255
+        },
+        {
+            name: '生活',
+            value: 31255
+        },
+        {
+            name: '游玩',
+            value: 9845
+        },
+    ]
+    var option = {
+        title: {
+            text: '消费占比',
+            link: 'http://blog.stilling.cn/',
+        },
+        tooltip:{},
+        series: [
+            {
+                name: '占比',
+                type: 'pie',
+                data: pieData,
+                label:{
+                    formatter:function (arg) {
+                        // console.log(arg)
+                        return arg.name+'消 费:'+arg.value+'\n占比：'+arg.percent+'%'
+                    }
+                },
+                //radius:20 //饼图的半径
+                // radius: '20%' //百分比参照的宽度和高度中较小的那一部分的一半来进行百分比设置
+                //radius:['50%','75%']//第0个元素代表内圆半径，第1个元素外圆半径
+                roseType:'radius' ,//南丁格尔图：饼图每个区域半径不同
+                // selectedMode:'single',//single选择偏移
+                selectedMode:'multiple',//选择偏移
+            }
+        ]
+    }
+    mCharts.setOption(option)
+</script>
+</html>

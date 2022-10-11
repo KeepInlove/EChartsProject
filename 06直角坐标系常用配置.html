@@ -8,7 +8,7 @@
 -->
 <head>
     <meta charset="UTF-8">
-    <title>快速上手</title>
+    <title>06直角坐标系常用配置</title>
     <script src="js/echarts.min.js"></script>
     <!--
     1.引入文件
@@ -24,10 +24,26 @@
 <script>
     var mCharts=echarts.init(document.getElementById('my'))
     var option={
+        dataZoom:[
+            {
+                //type:'slider'
+                type:'inside' //鼠标滚轮
+            }
+        ],
         title:{
             text:'手机热度',
             link:'http://blog.stilling.cn/',
         },
+        grid:{
+            show:true,
+            borderWidth:5,
+            borderColor:'green',
+        },
+        // toolbox:{
+        //   feature:{
+        //       dataZoom:{}
+        //   }
+        // },
         xAxis:{
           type:'category', //类目轴
           data:['小米','苹果','华为']
@@ -38,7 +54,7 @@
         series:[
             {
                 name:'热度',
-                type:'line',
+                type:'bar',
                 data: [80,90,85]
             }
         ]
