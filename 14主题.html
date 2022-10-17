@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@Description:
+@author:guo
+@date 2022/10/15-15:17
+@email 904004593@qq.com
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>14主题</title>
+    <script src="js/echarts.min.js"></script>
+    <!--
+     // 1.在线编辑主题 https://www.echartsjs.com/theme-builder/
+    // 2.下载主题的js文件
+    // 3.在html中导入js文件
+    // 4.在init方法中指明主题的名称
+    -->
+</head>
+<div id="my" style="width: 600px;height: 400px" >
+</div>
+<body>
+<script>
+    var mCharts=echarts.init(document.getElementById('my'),'dark') //light,dark
+    var option={
+        title:{
+            text:'手机热度',
+            link:'http://blog.stilling.cn/',
+        },
+        xAxis:{
+            type:'category', //类目轴
+            data:['小米','苹果','华为']
+        },
+        yAxis:{
+            type: 'value',//数值轴
+        },
+        series:[
+            {
+                name:'热度',
+                type:'line',
+                data: [80,90,85]
+            }
+        ]
+    }
+    mCharts.setOption(option)
+</script>
+</body>
+</html>

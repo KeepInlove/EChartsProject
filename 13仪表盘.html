@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@Description:
+@author:guo
+@date 2022/10/6-23:11
+@email 904004593@qq.com
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>13仪表盘</title>
+    <script src="js/echarts.min.js"></script>
+    <!--
+    1.引入文件
+    2.准备盒子模型
+    3.实例化对象
+    4.准备配置项
+    5.将配置项设置给echarts实例
+    -->
+</head>
+<div id="my" style="width: 600px;height: 400px" >
+</div>
+<body>
+<script>
+    var mCharts=echarts.init(document.getElementById('my'))
+    var option={
+        title:{
+            text:'仪表盘',
+            link:'http://blog.stilling.cn/',
+        },
+        series:[
+            {
+
+                type:'gauge',
+                data:[
+                    {
+                        value:97,
+                        itemStyle:{
+                            color:'pink'
+                        }
+                    },
+                    {
+                        value:62
+                    }
+                ],
+                min:50,
+                max:200
+            }
+        ]
+    }
+    mCharts.setOption(option)
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@Description:
+@author:guo
+@date 2022/10/6-23:11
+@email 904004593@qq.com
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>18自适应</title>
+    <script src="js/echarts.min.js"></script>
+    <!--
+    1.监听窗口大小变化事件
+    2.在事件处理中调用Echarts实例对象的resize
+    -->
+</head>
+<div id="my" style="height: 400px;border: 1px solid red" >
+</div>
+<body>
+<script>
+    var mCharts=echarts.init(document.getElementById('my'))
+    var option={
+        title:{
+            text:'手机热度',
+            link:'http://blog.stilling.cn/',
+        },
+        xAxis:{
+          type:'category', //类目轴
+          data:['小米','苹果','华为']
+        },
+        yAxis:{
+            type: 'value',//数值轴
+        },
+        series:[
+            {
+                name:'热度',
+                type:'bar',
+                data: [80,90,85]
+            }
+        ]
+    }
+    mCharts.setOption(option)
+    //监听
+    window.onresize=function (){
+        //调用
+        mCharts.resize()
+        // console.log('window.onresize...')
+    }
+    window.onresize=mCharts.resize
+</script>
+</body>
+</html>

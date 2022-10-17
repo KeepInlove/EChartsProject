@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@Description:
+@author:guo
+@date 2022/10/6-23:11
+@email 904004593@qq.com
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>12雷达图</title>
+    <script src="js/echarts.min.js"></script>
+    <!--
+    1.引入文件
+    2.准备盒子模型
+    3.实例化对象
+    4.准备配置项
+    5.将配置项设置给echarts实例
+    -->
+</head>
+<div id="my" style="width: 600px;height: 400px">
+</div>
+<body>
+<script>
+    //1. ECharts最基本的代码结构
+    //2. 定义各个维度的最大值, 通过radar属性配置
+    //   易用性,功能,拍照,跑分,续航, 每个维度的最大值都是100
+    //3. 准备产品数据, 设置给series下的data
+    //   华为手机1: 80, 90, 80, 82, 90
+    //   中兴手机1: 70, 82, 75, 70, 78
+    //4. 将type的值设置为radar
+    // 各个维度的最大值
+    var dataMax = [
+        {
+            name: '易用性',
+            max: 100
+        },
+        {
+            name: '功能',
+            max: 100
+        },
+        {
+            name: '拍照',
+            max: 100
+        },
+        {
+            name: '跑分',
+            max: 100
+        },
+        {
+            name: '续航',
+            max: 100
+        }
+    ]
+
+    var mCharts = echarts.init(document.getElementById('my'))
+    var option = {
+        title: {
+            text: '性能综合对比',
+            link: 'http://blog.stilling.cn/',
+        },
+        radar:{ //配置各个维度的最大值
+          indicator:dataMax,
+            shape:'circle',//配置雷达图最外层的图形，circle/polygon
+        },
+        series: [
+            {
+                type: 'radar', // radar 此图表时一个雷达图
+                label: { // 设置标签的样式
+                    show: true // 显示数值
+                },
+                areaStyle: {}, // 将每一个产品的雷达图形成阴影的面积
+                data: [
+                    {
+                        name: '华为手mate50',
+                        value: [80, 90, 80, 82, 90]
+                    },
+                    {
+                        name: '苹果14',
+                        value: [70, 82, 70, 90, 68]
+                    }
+                ]
+            }
+        ]
+    }
+    mCharts.setOption(option)
+</script>
+</body>
+</html>

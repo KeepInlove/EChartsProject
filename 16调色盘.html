@@ -3,27 +3,25 @@
 <!--
 @Description:
 @author:guo
-@date 2022/10/11-16:19
+@date 2022/10/15-15:17
 @email 904004593@qq.com
 -->
 <head>
     <meta charset="UTF-8">
-    <title>07饼图</title>
+    <title>16调色盘</title>
     <script src="js/echarts.min.js"></script>
+    <script src="js/theme.js"></script>
     <!--
-    1.基本代码结构
-    2.准备数据
-    3.实例化对象
-    4.准备配置项
-    5.将配置项设置给echarts实例
+    1.主题调色盘
+    2.全剧调色盘
+    3.局部调色盘
     -->
 </head>
-<body>
-<div id="my" style="width: 600px;height: 400px">
+<div id="my" style="width: 600px;height: 400px" >
 </div>
-</body>
+<body>
 <script>
-    var mCharts = echarts.init(document.getElementById('my'))
+    var mCharts=echarts.init(document.getElementById('my'),'walden') //walden主题调色盘
     var pieData = [
         {
             name: '淘宝',
@@ -45,16 +43,15 @@
             value: 9845
         },
     ]
-    var option = {
-        legend:{
-            data:['淘宝','京东','拼多多','生活','游玩']
-        },
+    var option={
+        //全剧调色盘
+        color:[],
         title: {
             text: '消费占比',
             link: 'http://blog.stilling.cn/',
         },
         tooltip:{},
-        series: [
+        series: [  //某一个对象
             {
                 name: '占比',
                 type: 'pie',
@@ -75,8 +72,6 @@
         ]
     }
     mCharts.setOption(option)
-    mCharts.on('legendselectchanged',function (arg) {
-        console.log(arg)
-    })
 </script>
+</body>
 </html>

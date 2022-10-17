@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@Description:
+@author:guo
+@date 2022/10/6-23:11
+@email 904004593@qq.com
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>19加载动画</title>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <!--
+    1.监听窗口大小变化事件
+    2.在事件处理中调用Echarts实例对象的resize
+    -->
+</head>
+<div id="my" style="height: 400px;border: 1px solid red" >
+</div>
+<body>
+<script>
+    var mCharts=echarts.init(document.getElementById('my'))
+    mCharts.showLoading() //显示加载动画
+    $.get('data/test_data.json',function (res) {
+            // console.log(res)
+        mCharts.hideLoading()//隐藏加载动画
+        var axisData=[]
+        for (var i=0;i<res.length;i++){
+            var height=res[i].height
+            var weight=res[i].weight
+            var newArr =[height,weight]
+            axisData.push(newArr)
+        }
+        var option={
+            title:{
+                text:'散点图',
+                link:'http://blog.stilling.cn/',
+            },
+            dataZoom:[
+                {type:'slider'}
+            ],
+            xAxis:{
+                type:'value', //数值轴
+                scale:true
+            },
+            yAxis:{
+                type: 'value',//数值轴
+                scale:true
+            },
+            series:[
+                {
+
+                    // type:'scatter',
+                    type:'effectScatter', //涟漪动画
+                    showEffectOn:'emphasis',//时机选择 render,emphasis
+                    data: axisData,
+                    // symbolSize:3
+                    symbolSize:function (arg) {
+                        var height=arg[0]/100
+                        var weight=arg[1]
+                        //bmi= 体重kg/（身高*身高m） 大于28代表肥胖
+                        var bmi=weight/(height*height)
+                        if (bmi>28){
+                            return 15;
+                        }
+                        //console.log(arg)
+                        return 5
+
+                    },
+                    itemStyle:{
+                        color:function (arg){
+                            var height=arg.data[0]/100
+                            var weight=arg.data[1]
+                            //bmi= 体重kg/（身高*身高m） 大于28代表肥胖
+                            var bmi=weight/(height*height)
+                            if (bmi>28){
+                                return 'red';
+                            }
+                            //console.log(arg)
+                            return 'green'
+                        }
+                    }
+                }
+            ]
+        }
+        //setOption 可以设置多次，
+        //新旧option不是覆盖的关系，而是相互整合的关系
+        //只需要考虑变化的部分
+        mCharts.setOption(option)
+    })
+
+    //console.log(axisData)
+
+    //监听
+    window.onresize=function (){
+        //调用
+        mCharts.resize()
+        // console.log('window.onresize...')
+    }
+    window.onresize=mCharts.resize
+</script>
+</body>
+</html>
